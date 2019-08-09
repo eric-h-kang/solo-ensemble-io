@@ -6,16 +6,20 @@ import random, copy
 
 # TO DO
 # write pandas method that will return the availability in a list based on student name 
-
-def give_availability(name, ID, chart):
+def give_availability(name, ID, df):
     """
     returns availability and instrument of single student based on name
     """
-    temp = chart[chart['Name'] == name and chart['ID'] == ID]
-    temp = temp[['Name', 'Instrument', 'Avail']]
-    return temp.values.flatten().tolist()
+    temp = df.loc[(df['Name'] == name) & (df['ID'] == ID)]
+    return temp[['Name','n']].values.flatten().tolist()
 
-
+d = {
+     "Name": [1, 2, 3, 4, 5],
+     "ID": [9, 8, 7, 6, 5],
+     "n": ["a", "b", "c", "d", "e"]
+}
+df = pd.DataFrame(d)
+print(give_availability(1, 9, df))
 
 students = pd.DataFrame(columns = ['Name', 'Instrument', 'ID', 'Skill', 'Avail', 'Start', 'Piano'])
 
